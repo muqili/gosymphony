@@ -7,7 +7,7 @@ This library significantly eases the flow-based/graph-based development, and ach
 
 
 ## Quick Usage
-![demo](https://i.ibb.co/yV4930V/go-flow.png)
+![demo](https://i.ibb.co/b16Y2P3/go-flow-1.png)
 
 Assuming the task dependency graph is the above one, 
 the following code will resolve and run based on this
