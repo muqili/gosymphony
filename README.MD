@@ -1,6 +1,6 @@
-# go-symphony
-`go-symphony` is a library to allow devs to declare dependencies of tasks/functions, 
-and `go-symphony` would run all tasks based on their dependencies automatically.
+# gosymphony
+`gosymphony` is a library to allow devs to declare dependencies of tasks/functions, 
+and `gosymphony` would run all tasks based on their dependencies automatically.
 
 This library significantly eases the flow-based/graph-based development, and achieves optimized concurrency automatically.
 
@@ -23,29 +23,29 @@ import (
 
 
 func main() {
-    s := symphony.New()
+    s := gosymphony.New()
     
     // Define Task f1, f2, f3, f4, f5, f6, f7
     // Task can be declare in any order
-    s.Add("f2", []string{"f1", "f4"}, func(res map[string]*symphony.TaskState) (interface{}, error) {
+    s.Add("f2", []string{"f1", "f4"}, func(res map[string]*gosymphony.TaskState) (interface{}, error) {
         fmt.Println("==starting f2==")
         return "f2 result", nil
-    }).Add("f3", []string{"f2", "f4"}, func(res map[string]*symphony.TaskState) (interface{}, error) {
+    }).Add("f3", []string{"f2", "f4"}, func(res map[string]*gosymphony.TaskState) (interface{}, error) {
         fmt.Println("==starting f3==")
         return fmt.Sprintf("%s|%s|%s", res["f2"].R, res["f4"].R, "f3 result"), nil
-    }).Add("f4", []string{"f5"}, func(res map[string]*symphony.TaskState) (interface{}, error) {
+    }).Add("f4", []string{"f5"}, func(res map[string]*gosymphony.TaskState) (interface{}, error) {
         fmt.Println("==starting f4==")
         return "f4 result", nil
-    }).Add("f5", nil, func(res map[string]*symphony.TaskState) (interface{}, error) {
+    }).Add("f5", nil, func(res map[string]*gosymphony.TaskState) (interface{}, error) {
         fmt.Println("==starting f5==")
         return "f5 result", nil
-    }).Add("f6", []string{"f3"}, func(res map[string]*symphony.TaskState) (interface{}, error) {
+    }).Add("f6", []string{"f3"}, func(res map[string]*gosymphony.TaskState) (interface{}, error) {
         fmt.Println("==starting f6==")
         return "f6 result", nil
-    }).Add("f7", []string{"f4"}, func(res map[string]*symphony.TaskState) (interface{}, error) {
+    }).Add("f7", []string{"f4"}, func(res map[string]*gosymphony.TaskState) (interface{}, error) {
         fmt.Println("==starting f7==")
         return "f7 result", nil
-    }).Add("f1", nil, func(res map[string]*symphony.TaskState) (interface{}, error) {
+    }).Add("f1", nil, func(res map[string]*gosymphony.TaskState) (interface{}, error) {
         fmt.Println("==starting f1==")
         return "f1 result", nil
     })
