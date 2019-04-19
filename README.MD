@@ -4,13 +4,11 @@ and `symphony` would run all tasks based on their dependencies automatically.
 
 This library significantly eases the flow-based/graph-based development, and achieves optimized concurrency automatically.
 
+
+
 ## Quick Usage
-```
-f1 -> f2 -> f3 -> f6
-     / \   / \
-      |     |
-f5 -> f4 -------> f7
-```
+![alt text](https://ibb.co/9GZDMnG)
+
 Assuming the task dependency graph is the above one, 
 the following code will resolve and run based on this
 
