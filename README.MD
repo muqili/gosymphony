@@ -1,6 +1,6 @@
-# Symphony
-`Symphony` is a library to allow devs to declare dependencies of tasks/functions, 
-and `symphony` would run all tasks based on their dependencies automatically.
+# go-symphony
+`go-symphony` is a library to allow devs to declare dependencies of tasks/functions, 
+and `go-symphony` would run all tasks based on their dependencies automatically.
 
 This library significantly eases the flow-based/graph-based development, and achieves optimized concurrency automatically.
 
@@ -19,8 +19,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-
-	"gitlab.myteksi.net/gophers/go/user-trust/commons/symphony"
 )
 
 
