@@ -1,16 +1,22 @@
 # gosymphony
 `gosymphony` is a library to allow devs to declare dependencies of tasks/functions, 
-and `gosymphony` would run all tasks based on their dependencies automatically.
+and `gosymphony` would run all tasks based on their dependencies with optimized concurrency.
 
 This library significantly eases the flow-based/graph-based development, and achieves optimized concurrency automatically.
 
+![](https://i.imgur.com/iGqac64.jpg)
+
+## Install
+
+```go
+import "github.com/muqili/gosymphony"
+```
 
 
 ## Quick Usage
-![demo](https://i.imgur.com/F4ND6Ns.png)
+![](https://i.imgur.com/PBrRWbE.png)
 
-Assuming the task dependency graph is the above one, 
-the following code will resolve and run based on this
+
 
 ```go
 package main
@@ -18,7 +24,48 @@ package main
 import (
 	"context"
 	"errors"
-	"fmt"
+    "fmt"
+    
+    "github.com/muqili/gosymphony"
+)
+
+
+func main() {
+    s := gosymphony.New()
+    
+    // Define Task f1, f2, f3, f4, f5, f6, f7
+    // Task can be declare in any order
+    s.Add("f1", nil, func(res map[string]*gosymphony.TaskState) (interface{}, error)){
+        return "f1 result", nil
+    }).Add("f2", nil, func(res map[string]*gosymphony.TaskState) (interface{}, error){
+        return "f1 result", nil
+    }).Add("f3", []string{"f1", "f2"}, func(res map[string]*gosymphony.TaskState) (interface{}, error) {
+        return "f3 result", nil
+    })
+    // wait up to 1500ms
+    res, err := s.Do(context.Background(), 1500)
+
+    f2result,errf2 := res["f2"]
+    f3result, errf3 := res["f3"]
+ }
+```
+
+## Advanced Usage
+![demo](https://i.imgur.com/F4ND6Ns.png)
+
+Assuming the task dependency graph is the above one, 
+the following code will resolve and run based on this
+
+
+```go
+package main
+
+import (
+	"context"
+	"errors"
+    "fmt"
+    
+    "github.com/muqili/gosymphony"
 )
 
 
@@ -49,6 +96,7 @@ func main() {
         fmt.Println("==starting f1==")
         return "f1 result", nil
     })
+    // wait up to 1500ms
     res, err := s.Do(context.Background(), 1500)
     
 
