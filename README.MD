@@ -22,18 +22,16 @@ import "github.com/muqili/gosymphony"
 package main
 
 import (
-	"context"
-	"errors"
-	"fmt"
-    
-	"github.com/muqili/gosymphony"
+    "context"
+    "errors"
+    "fmt"
+    "github.com/muqili/gosymphony"
 )
-
 
 func main() {
     s := gosymphony.New()
-    
-    // Define Task f1, f2, f3, f4, f5, f6, f7
+
+    // Define Task f1, f2, f3
     // Task can be declare in any order
     s.Add("f1", nil, func(res map[string]*gosymphony.TaskState) (interface{}, error)){
         return "f1 result", nil
@@ -61,13 +59,11 @@ the following code will resolve and run based on this
 package main
 
 import (
-	"context"
-	"errors"
+    "context"
+    "errors"
     "fmt"
-    
     "github.com/muqili/gosymphony"
 )
-
 
 func main() {
     s := gosymphony.New()
